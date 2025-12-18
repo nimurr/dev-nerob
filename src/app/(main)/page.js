@@ -1,5 +1,7 @@
 'use client';
 import AboutMe from '@/Components/Home/AboutMe';
+import Contact from '@/Components/Home/Contact';
+import Educations from '@/Components/Home/Educations';
 import Experience from '@/Components/Home/Experience';
 import Hero from '@/Components/Home/Hero';
 import Projects from '@/Components/Home/Projects';
@@ -40,9 +42,18 @@ const Page = () => {
             </Section>
 
             <Section>
-
                 <section id="projects">
                     <Projects />
+                </section>
+            </Section>
+            <Section>
+                <section id="education">
+                    <Educations />
+                </section>
+            </Section>
+            <Section>
+                <section id="contact">
+                    <Contact />
                 </section>
             </Section>
         </div>

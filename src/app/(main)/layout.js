@@ -25,7 +25,7 @@ export default function Layout({ children }) {
         <div className="bg-tertiary bg-grid-pattern">
             <Header />
             {children}
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

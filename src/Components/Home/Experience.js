@@ -70,7 +70,7 @@ export default function Experience() {
             <div ref={containerRef} className="relative w-full flex flex-col items-center">
 
                 {/* Vertical timeline line */}
-                <div className="absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-1 bg-primary"></div>
+                {/* <div className="absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-1 bg-primary"></div> */}
 
                 {experiences.map((exp, index) => {
                     const isLeft = index % 2 === 0; // alternate left/right

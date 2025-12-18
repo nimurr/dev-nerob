@@ -8,7 +8,7 @@ export default function AboutMe() {
         >
 
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <div className="flex justify-center md:justify-end">
+                <div className="flex md:order-1 order-2 justify-center md:justify-end">
                     <div className="relative w-64 h-64 md:w-[700px] md:h-[700px] rounded-3xl bg-white/10 backdrop-blur-xl shadow-xl flex items-center justify-center">
                         <img
                             src="/Images/Home/NFV2.png"
@@ -19,7 +19,7 @@ export default function AboutMe() {
                 </div>
 
                 {/* Text Content */}
-                <div className="text-center md:text-left">
+                <div className="text-center md:order-2 order-1 md:text-left">
                     <h2 className="text-3xl md:text-[100px] font-bold text-white md:mb-10">
                         About Me
                     </h2>
