@@ -13,7 +13,7 @@ export default function AboutMe() {
                         <img
                             src="/Images/Home/NFV2.png"
                             alt="Nimur Rahman Nerob"
-                            className="w-full h-full rounded-lg object-contain drop-shadow-[0_0px_10px_#80ed99]"
+                            className="w-full h-full rounded-3xl object-contain drop-shadow-[0_0px_10px_#80ed99]"
                         />
                     </div>
                 </div>
