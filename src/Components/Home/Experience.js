@@ -78,7 +78,7 @@ export default function Experience() {
                         <div
                             key={index}
                             className={`timeline-card relative w-full md:w-1/2 p-6 bg-white/10 backdrop-blur-xl border border-primary rounded-2xl shadow-xl mb-12
-                transform transition-all duration-700
+                transform transition-all duration-700  hover:shadow-[0_0px_10px_#80ed99]
                 ${isLeft ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"}
               `}
                         >
