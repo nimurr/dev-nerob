@@ -22,7 +22,7 @@ export const metadata = {
 
 export default function Layout({ children }) {
     return (
-        <div className="bg-tertiary bg-grid-pattern">
+        <div className="bg-tertiary relative bg-grid-pattern">
             <Header />
             {children}
             {/* <Footer /> */}
