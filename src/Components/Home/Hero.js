@@ -4,7 +4,7 @@ import React from "react";
 export default function Hero() {
     return (
         <section
-            className="min-h-screen flex items-center justify-center px-6"
+            className="min-h-screen flex items-center justify-center px-6 md:py-0 py-10 "
         >
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
@@ -26,7 +26,7 @@ export default function Hero() {
                         I build modern web applications, interactive experiences, and
                         scalable software with a focus on performance and clean design.
                     </p>
-                    <p className="mt-6 text-gray-400 max-w-xl">
+                    <p className="md:mt-6 mt-2 text-gray-400 max-w-xl">
                         I’m committed to creating impactful digital experiences that blend performance with modern design and usability.
                     </p>
 

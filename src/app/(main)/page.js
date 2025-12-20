@@ -16,7 +16,7 @@ const Page = () => {
 
     return (
         <div className='container flex flex-col gap-5 md:gap-10 mx-auto'>
-            <div className='fixed top-[40%] bg-gray-500/30 p-2 rounded-lg right-5 flex flex-col gap-4'>
+            <div className='fixed top-[65%] md:top-[40%] z-10 bg-gray-500/50 backdrop-blur-xl p-2 rounded-lg right-5 flex flex-col gap-4'>
                 <Link href="https://www.facebook.com/NimurRahmanNerob" target='_blank' className='hover:scale-125 transition-transform'>
                     <img className='w-12' src="https://img.icons8.com/?size=48&id=118497&format=png" alt="" />
                 </Link>
