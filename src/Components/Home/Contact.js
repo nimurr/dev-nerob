@@ -22,7 +22,7 @@ export default function Contact() {
         <section
             ref={sectionRef}
             id="contact"
-            className={`min-h-[70vh] md:py-0 py-10 border border-primary flex flex-col rounded-t-3xl items-center justify-center px-6 bg-gradient-to-br from-[#0b0b14] via-[#12122a] to-tertiary
+            className={`min-h-[70vh] md:py-0 py-10 border border-primary flex flex-col rounded-t-3xl items-center justify-center px-6 bg-gradient-to-br from-[#1b0d24e1] via-[#1d1d3fe7] to-tertiary
         transition-all duration-700 transform ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
         >
             <h2 className="text-3xl md:text-[100px] text-center font-bold text-white mb-10  md:mb-20">Contact Me</h2>
