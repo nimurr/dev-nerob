@@ -3,41 +3,30 @@ import React from 'react';
 
 const projects = [
     {
+        title: "E-commerce Website",
+        image: "/Images/Projects/projects_3.png",
+        tech: ["Next.js", "React", "Tailwind", "Node.js", "MongoDB"],
+        link: "https://bongobuy.netlify.app/",
+    },
+    {
         title: "AI bot langding page",
         image: "/Images/Projects/projects_2.png",
         tech: ["JavaScript", "Next.js", "Tailwind", "Framer Motion"],
         link: "https://ai-bot-langding-page.netlify.app/",
     },
     {
-        title: "E-commerce App",
-        image: "/Images/Projects/project-1.png",
-        tech: ["React", "Node.js", "MongoDB"],
-        link: "#",
+        title: "Tech Company Website",
+        image: "/Images/Projects/projects_4.png",
+        tech: ["Next.js", "Tailwind", "Framer Motion"],
+        link: "https://beeoct.netlify.app/",
     },
     {
-        title: "Blog Platform",
-        image: "/Images/Projects/project-1.png",
-        tech: ["Next.js", "React", "CSS"],
-        link: "#",
+        title: "Helth Care Website",
+        image: "/Images/Projects/projects_5.png",
+        tech: ["Next.js", "Tailwind", "Framer Motion" , "Node js", "MongoDB" , "Stripe" , "Socket.io"],
+        link: "https://suplify-website.netlify.app/",
     },
-    {
-        title: "3D Web Experience",
-        image: "/Images/Projects/project-1.png",
-        tech: ["Three.js", "React", "Tailwind"],
-        link: "#",
-    },
-    {
-        title: "Blog Platform",
-        image: "/Images/Projects/project-1.png",
-        tech: ["Next.js", "React", "CSS"],
-        link: "#",
-    },
-    {
-        title: "3D Web Experience",
-        image: "/Images/Projects/project-1.png",
-        tech: ["Three.js", "React", "Tailwind"],
-        link: "#",
-    },
+
 ];
 
 export default function Projects() {
