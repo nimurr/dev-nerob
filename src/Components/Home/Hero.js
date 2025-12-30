@@ -33,7 +33,8 @@ export default function Hero() {
                     {/* Buttons */}
                     <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                         <a
-                            href="#projects"
+                            href="https://drive.google.com/file/d/1EdPCiAkCesG5XWaK1vrDkaVcnKJQv0xu/view?usp=sharing"
+                            target="_blank"
                             className="px-6 py-3 rounded-xl bg-primary text-tertiary font-medium hover:scale-105 transition"
                         >
                             View Resume
