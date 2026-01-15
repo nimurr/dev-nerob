@@ -1,31 +1,61 @@
 'use client';
 import Link from 'next/link';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { FaEnvelope, FaPhone, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 export default function Contact() {
     const sectionRef = useRef(null);
-    const [visible, setVisible] = useState(false);
+    const titleRef = useRef(null);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) setVisible(true);
-            },
-            { threshold: 0.3 }
-        );
-        if (sectionRef.current) observer.observe(sectionRef.current);
-        return () => observer.disconnect();
+        if (!window.gsap || !window.ScrollTrigger) return;
+
+        const gsap = window.gsap;
+        const ScrollTrigger = window.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const title = titleRef.current;
+        const text = title.innerText;
+        title.innerText = "";
+
+        // Wrap each letter in a span
+        const letters = text.split("").map(char => {
+            const span = document.createElement("span");
+            span.innerText = char === " " ? "\u00A0" : char; // preserve spaces
+            span.style.display = "inline-block";
+            title.appendChild(span);
+            return span;
+        });
+
+        // Animate letters on scroll
+        gsap.from(letters, {
+            y: -50,
+            opacity: 0,
+            rotationX: 90,
+            stagger: 0.05,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: titleRef.current,
+                start: "top 85%",
+            }
+        });
+
     }, []);
 
     return (
         <section
             ref={sectionRef}
             id="contact"
-            className={`min-h-[70vh] md:py-0 py-10 border border-primary flex flex-col rounded-t-3xl items-center justify-center px-6 bg-gradient-to-br from-[#1b0d24e1] via-[#1d1d3fe7] to-tertiary
-        transition-all duration-700 transform ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+            className="min-h-[70vh] md:py-0 py-10 border border-primary flex flex-col rounded-t-3xl items-center justify-center px-6 bg-gradient-to-br from-[#1b0d24e1] via-[#1d1d3fe7] to-tertiary"
         >
-            <h2 className="text-3xl md:text-[100px] text-center font-bold text-white mb-10  md:mb-20">Contact Me</h2>
+            {/* Animated Header */}
+            <h2
+                ref={titleRef}
+                className="text-3xl md:text-[100px] text-center font-bold text-white mb-10 md:mb-20"
+            >
+                Contact Me
+            </h2>
 
             <div className="flex flex-col md:flex-row gap-8 w-full max-w-5xl">
                 {/* Contact Info */}
@@ -33,7 +63,7 @@ export default function Contact() {
                     <h3 className="text-xl text-white font-semibold">Get in Touch</h3>
                     <p className="text-gray-400">I'm always open to new opportunities and collaborations. Feel free to reach out via email or social media.</p>
                     <div className="flex flex-col gap-3 text-gray-300">
-                        <Link target='_blank' href="mailto:nimurnerob404@gmail" className="flex items-center gap-3 hover:text-primary transition">
+                        <Link target='_blank' href="mailto:nimurnerob404@gmail.com" className="flex items-center gap-3 hover:text-primary transition">
                             <FaEnvelope /> nimurnerob404@gmail.com
                         </Link>
                         <Link target='_blank' href="tel:+8801708784404" className="flex items-center gap-3 hover:text-primary transition">

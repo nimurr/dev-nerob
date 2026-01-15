@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const educationList = [
     {
@@ -19,53 +19,87 @@ const educationList = [
 
 export default function Educations() {
     const containerRef = useRef(null);
-    const [visible, setVisible] = useState([]);
+    const titleRef = useRef(null);
 
     useEffect(() => {
-        const cards = containerRef.current?.querySelectorAll('.edu-card');
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setVisible(prev => {
-                            const newVisible = [...prev];
-                            newVisible[index] = true;
-                            return newVisible;
-                        });
-                    }
-                });
-            },
-            { threshold: 0.3 }
-        );
+        if (!window.gsap || !window.ScrollTrigger) return;
 
-        cards?.forEach(card => observer.observe(card));
-        return () => observer.disconnect();
+        const gsap = window.gsap;
+        const ScrollTrigger = window.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ------------------------
+        // Animate Header Text
+        // ------------------------
+        const title = titleRef.current;
+        const text = title.innerText;
+        title.innerText = "";
+        const letters = text.split("").map(char => {
+            const span = document.createElement("span");
+            span.innerText = char === " " ? "\u00A0" : char;
+            span.style.display = "inline-block";
+            title.appendChild(span);
+            return span;
+        });
+
+        gsap.from(letters, {
+            y: -50,
+            opacity: 0,
+            rotationX: 90,
+            stagger: 0.05,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: titleRef.current,
+                start: "top 85%",
+            }
+        });
+
+        // ------------------------
+        // Animate Education Cards
+        // ------------------------
+        const cards = containerRef.current.querySelectorAll('.edu-card');
+        gsap.from(cards, {
+            y: 50,
+            opacity: 0,
+            scale: 0.95,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top 80%",
+            }
+        });
+
     }, []);
 
     return (
         <section
             id="education"
             ref={containerRef}
-            className="min-h-[70vh] flex flex-col items-center justify-center px-6 "
+            className="min-h-[70vh] flex flex-col items-center justify-center px-6 relative"
         >
-            <h2 className="text-3xl md:text-[100px] text-center font-bold text-white mb-10 md:mb-20">Education</h2>
+            {/* Header */}
+            <h2
+                ref={titleRef}
+                className="text-3xl md:text-[100px] text-center font-bold text-white mb-10 md:mb-20"
+            >
+                Education
+            </h2>
 
+            {/* Cards */}
             <div className="grid lg:grid-cols-2 gap-8 w-full">
                 {educationList.map((edu, index) => (
                     <div
                         key={index}
-                        className={`edu-card relative p-8 bg-white/10 backdrop-blur-xl border border-primary rounded-3xl
-              transform transition-all duration-700 hover:shadow-[0_0px_10px_#80ed99] 
-              ${visible[index] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}
-              hover:scale-105 `}
+                        className="relative p-8 bg-white/10 backdrop-blur-xl border border-primary rounded-3xl hover:shadow-[0_0px_10px_#80ed99] hover:scale-105 transition transform duration-500"
                     >
                         <h3 className="text-2xl font-semibold text-white">{edu.degree}</h3>
                         <p className="text-sm text-gray-300 my-2">{edu.institution}</p>
                         <p className="text-gray-400 mt-1">{edu.field}</p>
                         <p className="text-gray-400 mt-1">{edu.duration}</p>
-                        {edu.grade && (
-                            <p className="text-gray-400 mt-1 font-medium">{edu.grade}</p>
-                        )}
+                        {edu.grade && <p className="text-gray-400 mt-1 font-medium">{edu.grade}</p>}
                     </div>
                 ))}
             </div>
@@ -77,4 +111,3 @@ export default function Educations() {
         </section>
     );
 }
-

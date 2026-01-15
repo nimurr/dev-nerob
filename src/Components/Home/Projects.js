@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 
 const projects = [
     {
@@ -30,6 +30,7 @@ const projects = [
 
 export default function Projects() {
     const titleRef = useRef(null);
+    const sectionRef = useRef(null);
 
     useEffect(() => {
         if (!window.gsap || !window.ScrollTrigger) return;
@@ -37,10 +38,10 @@ export default function Projects() {
         const ScrollTrigger = window.ScrollTrigger;
         gsap.registerPlugin(ScrollTrigger);
 
+        // Animate header letters
         const title = titleRef.current;
         const text = title.innerText;
         title.innerText = "";
-
         const letters = text.split("").map(char => {
             const span = document.createElement("span");
             span.innerText = char === " " ? "\u00A0" : char;
@@ -62,10 +63,29 @@ export default function Projects() {
             }
         });
 
+        // Animate only images in project cards on scroll
+        const images = sectionRef.current.querySelectorAll("img");
+        images.forEach(img => {
+            gsap.fromTo(img,
+                { scale: 1 },
+                {
+                    scale: 1.5,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: img,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,
+                    }
+                }
+            );
+        });
+
     }, []);
 
     return (
         <section
+            ref={sectionRef}
             id="projects"
             className="min-h-screen flex flex-col items-center justify-center px-6"
         >
@@ -85,7 +105,7 @@ export default function Projects() {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative hover:shadow-[0_0px_10px_#80ed99] bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl overflow-hidden transform transition-transform duration-500 hover:scale-105"
+                        className="group relative hover:skew-x-[2deg] hover:shadow-[0_0px_10px_#80ed99] bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl overflow-hidden transform transition-transform duration-500 hover:scale-105"
                     >
                         <img
                             src={project.image}
