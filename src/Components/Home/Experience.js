@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const experiences = [
     {
@@ -36,51 +36,103 @@ const experiences = [
 
 export default function Experience() {
     const containerRef = useRef(null);
-    const [visible, setVisible] = useState([]);
+    const lineRef = useRef(null);
+    const titleRef = useRef(null);
 
     useEffect(() => {
-        const cards = containerRef.current?.querySelectorAll(".timeline-card");
-        const observer = new IntersectionObserver(
-            entries => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setVisible(prev => {
-                            const newVisible = [...prev];
-                            newVisible[index] = true;
-                            return newVisible;
-                        });
-                    }
-                });
-            },
-            { threshold: 0.3 }
+        if (!window.gsap || !window.ScrollTrigger) return;
+
+        const gsap = window.gsap;
+        const ScrollTrigger = window.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const title = titleRef.current;
+        const text = title.innerText;
+        title.innerText = "";
+        const letters = text.split("").map(char => {
+            const span = document.createElement("span");
+            span.innerText = char === " " ? "\u00A0" : char;
+            span.style.display = "inline-block";
+            title.appendChild(span);
+            return span;
+        });
+        gsap.from(letters, {
+            y: -50,
+            opacity: 0,
+            rotationX: 90,
+            stagger: 0.05,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: titleRef.current,
+                start: "top 85%",
+            }
+        });
+
+        const cards = containerRef.current.querySelectorAll(".timeline-card");
+
+        // Timeline line animation
+        gsap.fromTo(lineRef.current,
+            { scaleY: 0, transformOrigin: "top center" },
+            {
+                scaleY: 1,
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top+=100",
+                    end: "bottom bottom",
+                    scrub: true,
+                }
+            }
         );
 
-        cards?.forEach(card => observer.observe(card));
-        return () => observer.disconnect();
+        // Animate each card
+        cards.forEach((card, i) => {
+            const fromDirection = i % 2 === 0 ? -200 : 200;
+
+            gsap.from(card, {
+                x: fromDirection,
+                y: 50,
+                opacity: 0,
+                scale: 0.8,
+                rotation: i % 2 === 0 ? -5 : 5,
+                duration: 0.8,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: card,
+                    start: "top 80%",
+                    end: "top 50%",
+                    toggleActions: "play none none reverse",
+                }
+            });
+        });
     }, []);
 
     return (
         <section
             id="experience"
-            className="min-h-screen flex flex-col items-center justify-center px-6 "
+            className="min-h-screen flex flex-col items-center justify-center px-6 relative"
         >
-
-            <h2 className="text-3xl md:text-[100px] font-bold text-white mb-10 md:mb-20">Experience</h2>
+            <h2 
+            ref={titleRef}
+            className="text-3xl md:text-[100px] font-bold text-white mb-10 md:mb-20 text-center">
+                Experience
+            </h2>
 
             <div ref={containerRef} className="relative w-full flex flex-col items-center">
 
                 {/* Vertical timeline line */}
-                {/* <div className="absolute left-1/2 top-0 transform -translate-x-1/2 h-full w-1 bg-primary"></div> */}
+                <div
+                    ref={lineRef}
+                    className="absolute left-1/2 top-0 transform -translate-x-1/2 w-1 bg-primary h-full z-0"
+                ></div>
 
                 {experiences.map((exp, index) => {
-                    const isLeft = index % 2 === 0; // alternate left/right
+                    const isLeft = index % 2 === 0;
                     return (
                         <div
                             key={index}
-                            className={`timeline-card relative w-full md:w-1/2 p-6 bg-white/10 backdrop-blur-xl border border-primary rounded-2xl shadow-xl mb-12
-                transform transition-all duration-700  hover:shadow-[0_0px_10px_#80ed99]
-                ${isLeft ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"}
-              `}
+                            className={`timeline-card relative w-full md:w-1/2 p-6 bg-white/10 backdrop-blur-xl border border-primary rounded-2xl shadow-xl mb-12 z-10
+                            ${isLeft ? "md:mr-auto md:text-right" : "md:ml-auto md:text-left"}`}
                         >
                             {/* Timeline dot */}
                             <div
