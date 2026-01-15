@@ -27,11 +27,11 @@ const Page = () => {
                     <img className='w-12' src="https://img.icons8.com/?size=96&id=BkugfgmBwtEI&format=png" alt="" />
                 </Link>
             </div>
-            <Section>
-                <section id="home">
-                    <Hero />
-                </section>
-            </Section>
+
+            <section id="home">
+                <Hero />
+            </section>
+
 
             <Section>
                 <section id="about">
@@ -68,7 +68,7 @@ const Page = () => {
                     <Contact />
                 </section>
             </Section>
-        </div>
+        </div >
     );
 }
 

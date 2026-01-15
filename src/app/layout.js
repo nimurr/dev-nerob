@@ -29,10 +29,14 @@ export default function RootLayout({ children }) {
         </link>
         <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
         </link>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js" integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="./../utils/gsapAnimation.js" ></script>
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `} 
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         <NextTopLoader
           color="#7ed957"  // Change to your desired color
@@ -45,6 +49,9 @@ export default function RootLayout({ children }) {
         <Providers>
           {children}
         </Providers>
+
+
+
       </body>
     </html>
   );
