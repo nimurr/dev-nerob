@@ -167,17 +167,17 @@ export default function AboutMe() {
           </div>
 
           {/* BUTTONS */}
-          <div className="about-buttons mt-8 flex gap-4 justify-center md:justify-start">
+          <div className=" mt-8 flex gap-4 justify-center md:justify-start">
             <a
               href="#contact"
-              className="about-btn px-6 py-3 rounded-xl bg-primary text-tertiary font-medium hover:scale-105 transition"
+              className=" px-6 py-3 rounded-xl bg-primary text-tertiary font-medium hover:scale-105 transition"
             >
               Contact Me
             </a>
 
             <a
               href="/resume.pdf"
-              className="about-btn px-6 py-3 rounded-xl border border-white/20 text-white hover:bg-white/10 transition"
+              className=" px-6 py-3 rounded-xl border border-white/20 text-white hover:bg-white/10 transition"
             >
               Download CV
             </a>

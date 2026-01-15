@@ -1,8 +1,7 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 export default function Skills() {
-    const sectionRef = useRef(null);
     const titleRef = useRef(null);
 
     const skills = [
@@ -18,79 +17,37 @@ export default function Skills() {
         { name: "Docker", icon: "https://img.icons8.com/?size=160&id=LdUzF8b5sz2R&format=png" },
     ];
 
+    // Optional: simple header letter animation using GSAP
     useEffect(() => {
-        if (!window.gsap || !window.ScrollTrigger) return;
-
+        if (!window.gsap) return;
         const gsap = window.gsap;
-        const ScrollTrigger = window.ScrollTrigger;
-        gsap.registerPlugin(ScrollTrigger);
 
-        const ctx = gsap.context(() => {
-            // Animate title letters
-            const title = titleRef.current;
-            const text = title.innerText;
-            title.innerText = "";
-            const letters = text.split("").map(char => {
-                const span = document.createElement("span");
-                span.innerText = char === " " ? "\u00A0" : char;
-                span.style.display = "inline-block";
-                title.appendChild(span);
-                return span;
-            });
+        const title = titleRef.current;
+        const text = title.innerText;
+        title.innerText = "";
 
-            gsap.from(letters, {
-                y: -50,
-                opacity: 0,
-                rotationX: 90,
-                stagger: 0.05,
-                duration: 0.8,
-                ease: "back.out(1.7)",
-                scrollTrigger: {
-                    trigger: titleRef.current,
-                    start: "top 85%",
-                }
-            });
+        const letters = text.split("").map(char => {
+            const span = document.createElement("span");
+            span.innerText = char === " " ? "\u00A0" : char;
+            span.style.display = "inline-block";
+            title.appendChild(span);
+            return span;
+        });
 
-            // Animate skill cards with scale, rotation, and stagger
-            gsap.from(".skill-card", {
-                y: 60,
-                opacity: 0,
-                scale: 0.8,
-                rotation: 15,
-                stagger: 0.1,
-                duration: 0.8,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 90%",
-                    end: "bottom 60%",
-                }
-            });
-
-            // Optional subtle hover effect on scroll
-            gsap.to(".skill-card", {
-                rotationY: 10,
-                yoyo: true,
-                repeat: -1,
-                ease: "sine.inOut",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
-                }
-            });
-
-        }, sectionRef);
-
-        return () => ctx.revert();
+        // Animate header letters
+        gsap.from(letters, {
+            y: -50,
+            opacity: 0,
+            stagger: 0.05,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+        });
     }, []);
 
     return (
         <section
-            ref={sectionRef}
             id="skills"
-            className="min-h-[80vh] px-6 py-20 flex flex-col justify-center "
+            className="min-h-[80vh] px-6 py-20 flex flex-col justify-center"
         >
             {/* Header */}
             <h2

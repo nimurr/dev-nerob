@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const projects = [
     {
@@ -9,7 +9,7 @@ const projects = [
         link: "https://bongobuy.netlify.app/",
     },
     {
-        title: "AI bot langding page",
+        title: "AI bot landing page",
         image: "/Images/Projects/projects_2.png",
         tech: ["JavaScript", "Next.js", "Tailwind", "Framer Motion"],
         link: "https://ai-bot-langding-page.netlify.app/",
@@ -21,23 +21,64 @@ const projects = [
         link: "https://beeoct.netlify.app/",
     },
     {
-        title: "Helth Care Website",
+        title: "Health Care Website",
         image: "/Images/Projects/projects_5.png",
-        tech: ["Next.js", "Tailwind", "Framer Motion" , "Node js", "MongoDB" , "Stripe" , "Socket.io"],
+        tech: ["Next.js", "Tailwind", "Framer Motion", "Node.js", "MongoDB", "Stripe", "Socket.io"],
         link: "https://suplify-website.netlify.app/",
     },
-
 ];
 
 export default function Projects() {
+    const titleRef = useRef(null);
+
+    useEffect(() => {
+        if (!window.gsap || !window.ScrollTrigger) return;
+        const gsap = window.gsap;
+        const ScrollTrigger = window.ScrollTrigger;
+        gsap.registerPlugin(ScrollTrigger);
+
+        const title = titleRef.current;
+        const text = title.innerText;
+        title.innerText = "";
+
+        const letters = text.split("").map(char => {
+            const span = document.createElement("span");
+            span.innerText = char === " " ? "\u00A0" : char;
+            span.style.display = "inline-block";
+            title.appendChild(span);
+            return span;
+        });
+
+        gsap.from(letters, {
+            y: -50,
+            opacity: 0,
+            rotationX: 90,
+            stagger: 0.05,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+                trigger: titleRef.current,
+                start: "top 85%",
+            }
+        });
+
+    }, []);
+
     return (
         <section
             id="projects"
-            className="min-h-screen flex flex-col items-center justify-center px-6 "
+            className="min-h-screen flex flex-col items-center justify-center px-6"
         >
-            <h2 className="text-3xl md:text-[100px] text-center font-bold text-white mb-10 md:mb-20">Projects</h2>
+            {/* Header with animation */}
+            <h2
+                ref={titleRef}
+                className="text-3xl md:text-[100px] text-center font-bold text-white mb-10 md:mb-20"
+            >
+                Projects
+            </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full ">
+            {/* Project cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
                 {projects.map((project, index) => (
                     <a
                         key={index}

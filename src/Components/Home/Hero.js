@@ -43,17 +43,21 @@ export default function Hero() {
             });
 
             // IMAGE PARALLAX (scroll)
-            gsap.to(".hero-image img", {
-                y: -80,
-                scale: 1.5,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 1,
+            gsap.fromTo(
+                ".hero-image img",
+                { y: 80, scale: 0.3 },   // start position
+                {
+                    y: -80,            // end position
+                    scale: 2,        // end scale
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1,      // smooth scrubbing
+                    }
                 }
-            });
+            );
 
         }, sectionRef);
 
