@@ -115,7 +115,7 @@ export default function Hero() {
 
                 {/* RIGHT */}
                 <div className="flex justify-center md:justify-end">
-                    <div className="hero-image relative flex overflow-hidden justify-end items-end w-64 h-64 md:w-[700px] md:h-[700px] backdrop-blur-sm bg-white/10 rounded-3xl shadow-[0_0_10px_#80ed99]">
+                    <div className="hero-image relative flex overflow-hidden justify-end rounded-full items-end w-64 h-64 md:w-[600px] md:h-[600px] backdrop-blur-sm bg-white/10  shadow-[0_0_10px_#80ed99]">
                         <img
                             src="/Images/Home/my.png"
                             alt="Nerob"
